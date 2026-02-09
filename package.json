@@ -1,0 +1,24 @@
+{
+  "name": "@yungando/tools",
+  "type": "module",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "bin": {
+    "tools": "./src/index.js"
+  },
+  "scripts": {
+    "lint": "node ./node_modules/eslint/bin/eslint.js .",
+    "lint:fix": "node ./node_modules/eslint/bin/eslint.js . --fix",
+    "zsh": "ln -sfn \"$(pwd)/zsh\" \"$HOME/.oh-my-zsh/custom/plugins/tools\""
+  },
+  "dependencies": {
+    "@sindresorhus/slugify": "^3.0.0",
+    "cac": "^6.7.14",
+    "child_process": "^1.0.2"
+  },
+  "devDependencies": {
+    "@yungando/eslint-config": "github:yungando/eslint-config#1.0.1",
+    "eslint": "^9.20.1",
+    "eslint-plugin-format": "^1.4.0"
+  }
+}

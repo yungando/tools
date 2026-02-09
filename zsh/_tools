@@ -1,0 +1,9 @@
+#compdef tools
+
+_tools_commands() {
+  local -a cmds
+  cmds=("${(@f)$(tools list 2>/dev/null)}")
+  _describe -t commands 'tools command' cmds
+}
+
+_arguments '1:command:_tools_commands' '*::args:->args'
