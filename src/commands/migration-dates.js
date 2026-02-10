@@ -8,14 +8,15 @@ export default {
   input: '[...input]',
   description: "Convert a Wordpress article publish date/time into 'TO:' and 'FROM:' timestamps for article migration.",
   action(input) {
-    const wordpressDate = new Date(input.join(' ').replace(' at ', ', '));
+    const wordpressDateString = `${input.join(' ').replace(' at ', ', ')} UTC`;
+    const wordpressDateObject = new Date(wordpressDateString);
 
-    if (!input || Number.isNaN(wordpressDate)) {
+    if (!input || Number.isNaN(wordpressDateObject)) {
       console.error('Missing or invalid date.');
     }
 
-    const fromTime = new Date(wordpressDate.getTime() - ONE_MINUTE_IN_MS);
-    const toTime = new Date(wordpressDate.getTime() + ONE_MINUTE_IN_MS);
+    const fromTime = new Date(wordpressDateObject.getTime() - ONE_MINUTE_IN_MS);
+    const toTime = new Date(wordpressDateObject.getTime() + ONE_MINUTE_IN_MS);
 
     const output = `FROM: '${formatDateForWordpressQuery(fromTime)}',\nTO: '${formatDateForWordpressQuery(toTime)}',`;
 
