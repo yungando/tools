@@ -17,7 +17,7 @@
     "child_process": "^1.0.2"
   },
   "devDependencies": {
-    "@yungando/eslint-config": "github:yungando/eslint-config#1.0.1",
+    "@yungando/eslint-config": "github:yungando/eslint-config#1.1.1",
     "eslint": "^9.20.1",
     "eslint-plugin-format": "^1.4.0"
   }
