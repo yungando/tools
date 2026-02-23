@@ -7,8 +7,8 @@
     "tools": "./src/index.js"
   },
   "scripts": {
-    "lint": "node ./node_modules/eslint/bin/eslint.js .",
-    "lint:fix": "node ./node_modules/eslint/bin/eslint.js . --fix",
+    "lint": "eslint",
+    "lint:fix": "eslint --fix",
     "zsh": "ln -sfn \"$(pwd)/zsh\" \"$HOME/.oh-my-zsh/custom/plugins/tools\""
   },
   "dependencies": {
@@ -17,7 +17,7 @@
     "child_process": "^1.0.2"
   },
   "devDependencies": {
-    "@yungando/eslint-config": "github:yungando/eslint-config#1.1.1",
+    "@yungando/eslint-config": "^1.2.2",
     "eslint": "^9.20.1",
     "eslint-plugin-format": "^1.4.0"
   }
