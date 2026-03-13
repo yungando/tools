@@ -14,9 +14,14 @@ const cli = cac('tools');
     const { default: command } = await import(commandPathUrl.href);
 
     const commandDeclaration = [commandName];
-    if (command.description) commandDeclaration.push(command.input);
+    if (command.input) commandDeclaration.push(command.input);
 
-    cli.command(commandDeclaration.join(' '), command.description).action(command.action);
+    const cliCommand = cli.command(commandDeclaration.join(' '), command.description);
+
+    for (const option of command.options ?? []) {
+      cliCommand.option(...option);
+    }
+    cliCommand.action(command.action);
   }
 
   cli.help();
