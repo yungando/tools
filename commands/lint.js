@@ -6,6 +6,7 @@ export default {
   input: '[...patterns]',
   options: [
     ['--fix', 'Fix the fixable eslint errors.'],
+    ['--compat', 'Use config that is compatible with existing LAD projects.'],
   ],
   description: 'Lint the current repo.',
   action: async (patterns, options) => {
@@ -13,7 +14,9 @@ export default {
     const lintDirectory = process.cwd();
 
     const eslintBin = path.join(toolsRoot, 'node_modules', 'eslint', 'bin', 'eslint.js');
-    const eslintConfig = path.join(toolsRoot, 'eslint.config.js');
+    const eslintConfig = options.compat
+      ? path.join(toolsRoot, 'eslint-compat.config.js')
+      : path.join(toolsRoot, 'eslint.config.js');
 
     const lintingTargets = patterns.length > 0 ? patterns : ['.'];
 
