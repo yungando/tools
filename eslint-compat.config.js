@@ -5,7 +5,11 @@ import reactPlugin from 'eslint-plugin-react';
 
 const jestGlobalsConfig = {
   name: 'yungando/jest/globals',
-  files: GLOB_TESTS,
+  files: [
+    ...GLOB_TESTS,
+    '**/__test_helpers__/**',
+    '**/__mocks__/**',
+  ],
   languageOptions: {
     globals: {
       ...jestPlugin.configs['flat/recommended'].languageOptions.globals,
