@@ -29,5 +29,14 @@ const reactConfig = {
   },
 };
 
+const nodeConfig = {
+  name: 'yungando/n/compat',
+  files: [GLOB_SRC],
+  /// keep-sorted
+  rules: {
+    'node/file-extension-in-import': ['error', 'never'],
+  },
+};
+
 export default config({ test: true, react: true })
-  .append([jestGlobalsConfig, reactConfig]); ;
+  .append([jestGlobalsConfig, reactConfig, nodeConfig]); ;
