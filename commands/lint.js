@@ -29,9 +29,6 @@ export default {
       ? path.join(toolsRoot, 'eslint-compat.config.js')
       : path.join(toolsRoot, 'eslint.config.js');
 
-    getPullReleaseFiles(lintDirectory);
-    process.exitCode = 1;
-
     const lintingTargets = options.pr
       ? getPullReleaseFiles(lintDirectory)
       : getLintingTargets(patterns);
