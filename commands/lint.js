@@ -1,6 +1,7 @@
-import { execSync, spawnSync } from 'node:child_process';
+import { execSync } from 'node:child_process';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { ESLint } from 'eslint';
 
 const getLintingTargets = (patterns) => patterns.length > 0 ? patterns : ['.'];
 
@@ -31,7 +32,6 @@ export default {
   action: async (patterns, options) => {
     const toolsRoot = fileURLToPath(new URL('../', import.meta.url));
 
-    const eslintBin = path.join(toolsRoot, 'node_modules', 'eslint', 'bin', 'eslint.js');
     const eslintConfig = options.compat
       ? path.join(toolsRoot, 'eslint-compat.config.js')
       : path.join(toolsRoot, 'eslint.config.js');
@@ -44,20 +44,22 @@ export default {
       ? getPullReleaseFiles(lintDirectory)
       : getLintingTargets(patterns);
 
-    const eslintArgs = [
-      eslintBin,
-      '--config',
-      eslintConfig,
-      ...(options.fix ? ['--fix'] : []),
-      ...lintingTargets,
-    ];
-
-    const res = spawnSync(process.execPath, eslintArgs, {
-      stdio: 'inherit',
+    const eslint = new ESLint({
       cwd: lintDirectory,
+      overrideConfigFile: eslintConfig,
+      fix: options.fix,
     });
 
-    if (res.error) throw res.error;
-    process.exitCode = res.status ?? 1;
+    const results = await eslint.lintFiles(lintingTargets);
+
+    if (options.fix) {
+      await ESLint.outputFixes(results);
+    }
+
+    const formatter = await eslint.loadFormatter('stylish');
+
+    // eslint-disable-next-line no-console
+    console.log(formatter.format(results));
+    process.exitCode = results.some((r) => r.errorCount > 0) ? 1 : 0;
   },
 };
