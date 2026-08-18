@@ -6,7 +6,7 @@ import { ESLint } from 'eslint';
 const getLintingTargets = (patterns) => patterns.length > 0 ? patterns : ['.'];
 
 const getPullReleaseFiles = (dir) => {
-  const res = execSync('gh pr diff --name-only', { cwd: dir, encoding: 'utf-8' });
+  const res = execSync('gh pr view --json files --jq \'.files[] | select(.changeType != "DELETED") | .path\'', { cwd: dir, encoding: 'utf-8' });
 
   if (res.error) throw res.error;
 
@@ -26,7 +26,7 @@ export default {
   options: [
     ['--fix', 'Fix the fixable eslint errors.'],
     ['--compat', 'Use config that is compatible with existing LAD projects.'],
-    ['--pr', 'Lint all files changed on the PR associated with current branch'],
+    ['--pr', 'Lint all files changed on the PR associated with current branch.'],
   ],
   description: 'Lint the current folder.',
   action: async (patterns, options) => {
