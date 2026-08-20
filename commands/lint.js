@@ -48,6 +48,7 @@ export default {
       cwd: lintDirectory,
       overrideConfigFile: eslintConfig,
       fix: options.fix,
+      warnIgnored: false,
     });
 
     const results = await eslint.lintFiles(lintingTargets);
