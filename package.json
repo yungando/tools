@@ -11,12 +11,12 @@
     "zsh": "ln -sfn \"$(pwd)/zsh\" \"$HOME/.oh-my-zsh/custom/plugins/tools\""
   },
   "dependencies": {
-    "@antfu/eslint-config": "^9.1.0",
+    "@antfu/eslint-config": "^9.3.0",
     "@sindresorhus/slugify": "^3.0.0",
     "@yungando/eslint-config": "^1.4.3",
     "cac": "^7.0.0",
-    "eslint": "^10.6.0",
-    "eslint-plugin-jest": "^29.15.4",
+    "eslint": "^10.8.1",
+    "eslint-plugin-jest": "^29.16.1",
     "eslint-plugin-react": "^7.37.5"
   },
   "overrides": {
