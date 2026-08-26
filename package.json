@@ -8,7 +8,7 @@
   "scripts": {
     "lint": "eslint",
     "lint:fix": "eslint --fix",
-    "zsh": "ln -sfn \"$(pwd)/zsh\" \"$HOME/.oh-my-zsh/custom/plugins/tools\""
+    "zsh": "make link-zsh"
   },
   "dependencies": {
     "@antfu/eslint-config": "^9.3.0",
