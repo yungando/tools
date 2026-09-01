@@ -39,4 +39,4 @@ const nodeConfig = {
 };
 
 export default config({ test: true, react: true })
-  .append([jestGlobalsConfig, reactConfig, nodeConfig]); ;
+  .append([jestGlobalsConfig, reactConfig, nodeConfig]);
