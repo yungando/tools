@@ -30,7 +30,7 @@ const reactConfig = {
 };
 
 const nodeConfig = {
-  name: 'yungando/n/compat',
+  name: 'yungando/node/compat',
   files: [GLOB_SRC],
   /// keep-sorted
   rules: {
