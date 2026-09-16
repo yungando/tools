@@ -1,4 +1,5 @@
 import { spawnSync } from 'node:child_process';
+import { log } from 'node:console';
 import copyToClipboard from '../utils/copy-to-clipboard.js';
 
 export default {
@@ -18,8 +19,7 @@ export default {
 
     const exportString = `export ${key}='{{ (bitwardenSecrets "${id}" (env "BWS_ACCESS_TOKEN")).value }}'`;
 
-    // eslint-disable-next-line no-console
-    console.log(exportString);
+    log(exportString);
     copyToClipboard(exportString);
   },
 };

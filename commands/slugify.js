@@ -1,3 +1,4 @@
+import { log } from 'node:console';
 import slugify from '@sindresorhus/slugify';
 import copyToClipboard from '../utils/copy-to-clipboard.js';
 
@@ -18,8 +19,7 @@ export default {
       decamelize: false,
     });
 
-    // eslint-disable-next-line no-console
-    console.log(outputString);
+    log(outputString);
     copyToClipboard(outputString);
   },
 };

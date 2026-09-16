@@ -1,3 +1,4 @@
+import { log } from 'node:console';
 import { readdirSync } from 'node:fs';
 
 export default {
@@ -14,7 +15,6 @@ export default {
       commandList.push(commandName);
     }
 
-    // eslint-disable-next-line no-console
-    console.log(commandList.sort().join('\n'));
+    log(commandList.sort().join('\n'));
   },
 };

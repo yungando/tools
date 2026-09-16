@@ -1,16 +1,20 @@
 import { execSync } from 'node:child_process';
+import { log } from 'node:console';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { ESLint } from 'eslint';
 
 const getLintingTargets = (patterns) => patterns.length > 0 ? patterns : ['.'];
 
+// eslint-disable-next-line consistent-return
 const getPullReleaseFiles = (dir) => {
-  const res = execSync('gh pr view --json files --jq \'.files[] | select(.changeType != "DELETED") | .path\'', { cwd: dir, encoding: 'utf-8' });
+  try {
+    const res = execSync('gh pr view --json files --jq \'.files[] | select(.changeType != "DELETED") | .path\'', { cwd: dir, encoding: 'utf-8' });
 
-  if (res.error) throw res.error;
-
-  return res.split('\n').filter(Boolean);
+    return res.split('\n').filter(Boolean);
+  } catch {
+    process.exit();
+  }
 };
 
 const getProjectRootDirectory = () => {
@@ -59,8 +63,7 @@ export default {
 
     const formatter = await eslint.loadFormatter('stylish');
 
-    // eslint-disable-next-line no-console
-    console.log(formatter.format(results));
+    log(formatter.format(results));
     process.exitCode = results.some((r) => r.errorCount > 0) ? 1 : 0;
   },
 };

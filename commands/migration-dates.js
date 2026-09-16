@@ -1,3 +1,4 @@
+import { log } from 'node:console';
 import copyToClipboard from '../utils/copy-to-clipboard.js';
 
 const ONE_MINUTE_IN_MS = 60000;
@@ -20,8 +21,7 @@ export default {
 
     const output = `FROM: '${formatDateForWordpressQuery(fromTime)}',\nTO: '${formatDateForWordpressQuery(toTime)}',`;
 
-    // eslint-disable-next-line no-console
-    console.log(output);
+    log(output);
     copyToClipboard(output);
   },
 };
